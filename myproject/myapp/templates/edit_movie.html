@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Movie page</title>
+</head>
+<body>
+    <form action="/updatemovie/{{data.movie_id}}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="movie_id" value="{{data.movie_id}}"/>
+        <label for="movie_name">Movie Name:</label>
+        <input type="text" id="movie_name" name="movie_name" value="{{data.movie_name}}"/><br>
+    
+        <label for="ticket_price">Ticket Price:</label>
+        <input type="text" id="ticket_price" name="ticket_price" value="{{data.ticket_price}}"/><br>
+    
+        <label for="image">Image:</label>
+        <input type="file" id="image" name="image"/><br>
+        
+        <label for="show_time">Show Time:</label>
+        <input type="text" id="show_time" name="show_time" value="{{data.show_time}}"/><br>
+    
+        <label for="type">Type:</label>
+        <input type="text" id="type" name="type" value="{{data.type}}"/><br>
+    
+        <label for="language">Language:</label>
+        <input type="text" id="language" name="language" value="{{data.language}}"/><br>
+    
+        <label for="release_date">Release Date:</label>
+        <input type="date" id="release_date" name="release_date" value="{{data.release_date}}"/><br>
+    
+        <label for="screening_type">Screening Type:</label>
+        <input type="text" id="screening_type" name="screening_type" value="{{data.screening_type}}"/><br>
+    
+        <button type="submit">Save Changes</button>
+    </form>
+    
+    <a href="/login_home">Login Home</a>
+    <a href="/home">home</a>
+</body>
+</html>
