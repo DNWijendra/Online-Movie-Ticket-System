@@ -8,5 +8,5 @@ Admin sign up
 Add, Delete, View movies by admin
 
 Yet To complete  : 
-Css of html pages
+Css of html pages,
 Edited functionalities
