@@ -134,7 +134,8 @@
         <div class="cards-container">
           {% for movie in movies %}
           <div class="card">
-            <img src="{{ movie.image.url }}" class="img-fluid" alt="{{ movie.movie_name }}">
+            <!-- <img src="{{ movie.image.url }}" class="img-fluid" alt="{{ movie.movie_name }}"> -->
+            <img src="{{ movie.image }}" alt="Profile Image">
             <div class="portfolio-info">
               <h4>{{ movie.movie_name }}</h4>
               <p>Price: {{ movie.ticket_price }}</p>
