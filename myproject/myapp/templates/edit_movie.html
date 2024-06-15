@@ -6,7 +6,14 @@
     <title>Edit Movie page</title>
 </head>
 <body>
-    <form action="/updatemovie/{{data.movie_id}}" method="post" enctype="multipart/form-data">
+
+    <form method="post" enctype="multipart/form-data" action="{% url 'updatemovie' movie_id=movie_id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </form>
+
+    <!-- <form action="/updatemovie/{{data.movie_id}}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="hidden" name="movie_id" value="{{data.movie_id}}"/>
         <label for="movie_name">Movie Name:</label>
@@ -34,9 +41,9 @@
         <input type="text" id="screening_type" name="screening_type" value="{{data.screening_type}}"/><br>
     
         <button type="submit">Save Changes</button>
-    </form>
+    </form> -->
     
-    <a href="/login_home">Login Home</a>
-    <a href="/home">home</a>
+    <a href="{% url 'Login_home' %}">Login Home</a>
+    
 </body>
 </html>

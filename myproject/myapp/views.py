@@ -59,16 +59,45 @@ def delete_movie(request,movie_id):
     movies = Movie.objects.all()
     return render(request,'Login_home.html',{'movies':movies})
 
-def edit_movie(request,movie_id):
-    data = Movie.objects.get(movie_id = movie_id)
-    return render(request,'update_movie',{'data' : data})
-    
+# def edit_movie(request,movie_id):
+#     data = Movie.objects.get(movie_id = movie_id)
+#     return render(request,'edit_movie.html',{'data':data})
 
-def update_movie(request,movie_id):
-    data = Movie.objects.get(movie_id = movie_id)
-    form = New_Movie_Form(request.POST,request.FILES,instance=data)
-    if form.is_valid():
-        form.save()
-        return redirect('login_home')
+def edit_movie(request, movie_id):
+    movie_instance = get_object_or_404(Movie, pk=movie_id)
+    form = New_Movie_Form(instance=movie_instance)
+    return render(request, 'edit_movie.html', {'form': form, 'movie_id': movie_id})
+
+def update_movie(request, movie_id):
+    movie_instance = get_object_or_404(Movie, pk=movie_id)
+    
+    if request.method == 'POST':
+        form = New_Movie_Form(request.POST, request.FILES, instance=movie_instance)
+        if form.is_valid():
+            form.save()
+            return redirect('Login_home')
     else:
-        return render(request,'edit_moive.html',{data:data})
+        form = New_Movie_Form(instance=movie_instance)
+    
+    return render(request, 'edit_movie.html', {'form': form, 'movie_id': movie_id})
+
+# def update_movie(request,movie_id):
+#     data = Movie.objects.get(movie_id = movie_id)
+#     form = New_Movie_Form(request.POST,request.FILES,instance=data)
+#     if form.is_valid():
+#         form.save()
+#         return redirect('login_home')
+#     else:
+#         return render(request,'edit_moive.html',{data:data})
+    
+    # data = get_object_or_404(Movie, pk=movie_id)
+
+    # if request.method == 'POST':
+    #     form = New_Movie_Form(request.POST, request.FILES, instance=data)
+    #     if form.is_valid():
+    #         form.save()
+    #         return redirect('login_home')
+    # else:
+    #     form = New_Movie_Form(instance=data)
+    
+    # return render(request, 'edit_movie.html', {'form': form, 'data': data})

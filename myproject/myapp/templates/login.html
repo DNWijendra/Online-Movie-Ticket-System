@@ -14,7 +14,7 @@
             <div class="form-holder">
                 <div class="form-content">
                     <div class="form-items">
-                        <h3>Login</h3>
+                        <h3>Admin Login</h3>
                         <form action="{% url 'login' %}" method="post" class="requires-validation" novalidate>
                             {% csrf_token %}
                             <div class="col-md-12">
@@ -29,6 +29,7 @@
                                <div class="invalid-feedback">Password field cannot be blank!</div> -->
                            </div>
 
+                            <br>
                             <div class="form-button mt-3">
                                 <button id="submit" type="submit" class="btn btn-primary">Login</button>
                             </div>
