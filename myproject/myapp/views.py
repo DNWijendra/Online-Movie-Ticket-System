@@ -109,8 +109,12 @@ def add_movie(request):
         form = New_Movie_Form()
     return render(request,"add_movie.html",{'form':form})
 
-def booktickets(request):
-    return render(request,"book_tickets.html")
+def booktickets(request,movie_name):
+    movie = get_object_or_404(Movie, movie_name=movie_name)
+    context = {
+        'movie_name': movie_name,  # Pass movie_name to template
+    }
+    return render(request,"book_tickets.html", {'movie': movie})
 
 def delete_movie(request,movie_id):
     movie = get_object_or_404(Movie, movie_id=movie_id)
