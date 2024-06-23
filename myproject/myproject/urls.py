@@ -33,7 +33,8 @@ urlpatterns = [
     path('booktickets/', views.booktickets, name='booktickets'),
     path('deletemovie/<int:movie_id>', views.delete_movie, name='deletemovie'),
     path('editmovie/<int:movie_id>', views.edit_movie, name='editmovie'),
-    path('updatemovie/<int:movie_id>', views.update_movie, name='updatemovie')
+    path('updatemovie/<int:movie_id>', views.update_movie, name='updatemovie'),
+    path('process_payment/', views.process_payment, name='process_payment')
 ]
 
 # Adding static and media URL patterns

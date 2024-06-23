@@ -29,6 +29,100 @@
        
     <!-- Template Main CSS File -->
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+    {% load seat_tags %}
+
+<style>
+  .seat-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+  }
+
+  .seat {
+      width: 40px;
+      height: 40px;
+      background-color: #ccc;
+      border: 2px solid #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .seat.selected {
+      background-color: #0880e8;
+  }
+
+  .seat.reserved {
+      background-color: #f00;
+      cursor: not-allowed;
+  }
+
+  .seat-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+  }
+
+  .seat-label {
+      font-weight: bold;
+      align-content: flex;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .screen {
+      background-color: #ccc;
+      height: 50px;
+      width: 80%;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+      line-height: 50px;
+      font-weight: bold;
+  }
+
+   /* Modal Styles */
+   .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0,0,0);
+      background-color: rgba(0,0,0,0.4);
+      padding-top: 60px;
+  }
+
+  .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+  }
+
+  .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+  }
+</style>
+
 </head>
 <body>
     
@@ -67,26 +161,72 @@
             </div>
             <!-- <a href="/home">Home page</a> -->
     <br><br>
-    <form>
-        <label>Name</label>
-        <input type="text" name="Name" required><br>
-        <label>Contact Number</label>
-        <input type="text" name="Contact Number" required><br>
-        <label>Email</label>
-        <input type="email" name="Email"><br>
-        <label>Date</label>
-        <input type="date" name="Date" required><br>
-        <label>Seat count</label>
-        <input type="number" name="Seat count" min="1" max="25" required><br>
+     <!-- Movie Selection -->
+     {% if selected_movie %}
+    <h3>{{ selected_movie.movie_name }}</h3>
+    {% else %}
+    <form action="{% url 'booktickets' %}" method="get">
+      <label for="movie_id">Select Movie:</label>
+      <select name="movie_id" id="movie_id">
+        {% for movie in movies %}
+        <option value="{{ movie.movie_id }}">{{ movie.movie_name }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit">Next</button>
     </form>
+    {% endif %}
+
+
+ <!-- Seat Selection -->
+ {% if selected_movie %}
+    <div class="seat-container">
+      <div class="screen">Screen</div>
+      {% for row in 'ABCDEFGH' %}
+      <div class="seat-row">
+        <span class="seat-label">{{ row }}</span>
+        {% for col in '123456789' %}
+        {% with seat=row|add:col %}
+        <div class="seat {% if selected_movie|is_reserved:seat %}reserved{% endif %}" data-row="{{ row }}" data-col="{{ col }}">
+          <span class="seat-label">{{ row }}{{ col }}</span>
+        </div>
+        {% endwith %}
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
     <br><br>
-    <form>
-        <label>Card Number</label>
-        <input type="text" name="Card Number" required><br>
-        <label>CVC</label>
-        <input type="text" name="CVC" required><br>
-        <label>Expiaration Date</label>
-        <select name="expiration_month" id="expiration_month" required>
+
+    <form id="booking-form" action="{% url 'booktickets' %}" method="post">
+      {% csrf_token %}
+      <label>Name</label>
+      <input type="text" name="Name" required><br>
+      <label>Contact Number</label>
+      <input type="text" name="Contact Number" required><br>
+      <label>Email</label>
+      <input type="email" name="Email"><br>
+      <label>Date</label>
+      <input type="date" name="Date" required><br>
+      <label>Seat count</label>
+      <input type="number" name="Seat count" min="1" max="25" required><br>
+      <input type="hidden" name="movie_id" value="{{ selected_movie.movie_id }}">
+      <input type="hidden" name="selected_seats" id="selected-seats">
+      <button type="button" onclick="openPaymentModal()">Proceed to Payment</button>
+    </form>
+      {% endif %}
+
+    <br><br>
+
+
+    <div id="paymentModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closePaymentModal()">&times;</span>
+        <h2>Payment Form</h2>
+        <form id="payment-form" action="{% url 'process_payment' %}" method="post">
+          {% csrf_token %}
+          <label>Card Number</label>
+          <input type="text" name="card_number" required><br>
+          <label>Expiry Date</label>
+          <select name="expiration_month" id="expiration_month" required>
             <option value="" disabled selected>Select month</option>
             <option value="01">January</option>
             <option value="02">February</option>
@@ -111,11 +251,27 @@
             <option value="06">2029</option>
             <option value="07">2030</option>
         </select>
-        <br>
-        <input type="submit" value="Book Tickets"/>
+        <br><br>
+          <label>CVV</label>
+          <input type="text" name="cvv" required><br>
+          <input type="hidden" name="movie_id" value="{{ selected_movie.movie_id }}">
+          <input type="hidden" name="selected_seats" id="payment-selected-seats">
+          <button type="submit">Book Tickets</button>
+        </form>
+      </div>
+    </div>
     </form>
 
           <br><br>
+
+          <div id="confirmationModal" class="modal">
+            <div class="modal-content">
+              <span class="close" onclick="closeConfirmationModal()">&times;</span>
+              <h2>Booking Confirmed</h2>
+              <p>Your booking has been confirmed. Thank you for your purchase!</p>
+              <button onclick="redirectToHomepage()">Exit</button>
+            </div>
+          </div>
     
           </div>
         </section>
@@ -175,7 +331,77 @@
     
       <!-- Template Main JS File -->
       <script src="{% static 'assets/js/main.js' %}"></script>
-    
+
+      
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const seats = document.querySelectorAll('.seat');
+    const selectedSeatsInput = document.getElementById('selected-seats');
+    const seatCountInput = document.querySelector('input[name="Seat count"]');
+
+    let selectedSeats = [];
+
+    seats.forEach(seat => {
+      seat.addEventListener('click', () => {
+        if (!seat.classList.contains('reserved')) {
+          seat.classList.toggle('selected');
+          const row = seat.getAttribute('data-row');
+          const col = seat.getAttribute('data-col');
+          const seatId = `${row}${col}`;
+
+          if (seat.classList.contains('selected')) {
+            selectedSeats.push(seatId);
+          } else {
+            selectedSeats = selectedSeats.filter(s => s !== seatId);
+          }
+
+          selectedSeatsInput.value = selectedSeats.join(',');
+          seatCountInput.value = selectedSeats.length;
+        }
+      });
+    });
+  });
+
+  function openPaymentModal() {
+    const modal = document.getElementById("paymentModal");
+    const selectedSeatsInput = document.getElementById('selected-seats');
+    const paymentSelectedSeatsInput = document.getElementById('payment-selected-seats');
+
+    paymentSelectedSeatsInput.value = selectedSeatsInput.value;
+    modal.style.display = "block";
+  }
+
+  function closePaymentModal() {
+    const modal = document.getElementById("paymentModal");
+    modal.style.display = "none";
+  }
+
+  function openConfirmationModal() {
+    const modal = document.getElementById("confirmationModal");
+    modal.style.display = "block";
+  }
+
+  function closeConfirmationModal() {
+    const modal = document.getElementById("confirmationModal");
+    modal.style.display = "none";
+  }
+
+  function redirectToHomepage() {
+    window.location.href = "{% url 'home' %}";
+  }
+
+  // Close the modals when the user clicks anywhere outside of them
+  window.onclick = function(event) {
+    const paymentModal = document.getElementById("paymentModal");
+    const confirmationModal = document.getElementById("confirmationModal");
+    if (event.target == paymentModal) {
+      paymentModal.style.display = "none";
+    }
+    if (event.target == confirmationModal) {
+      confirmationModal.style.display = "none";
+    }
+  }
+</script>
     </body>
     </html>
     
