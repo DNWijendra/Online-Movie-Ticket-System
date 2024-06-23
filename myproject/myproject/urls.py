@@ -25,8 +25,15 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('home/', home, name='home'),
-    path('signup/', signup, name='signup'),
+    # path('signup/', signup, name='signup'),
+
     path('login/', user_login, name='login'),
+    
+    path('user/login/', views.user_login, name='user_login'),
+    path('admin_m/login/', views.admin_login, name='admin_login'),
+    path('admin_m/signup/', views.admin_signup, name='admin_signup'),
+    path('user/signup/', views.user_signup, name='user_signup'),
+    path('user_home/', views.user_home, name='user_home'),
     path('Login_home/', views.Login_home, name='Login_home'),
     path('logout/', user_logout, name='logout'),
     path('addmovie/', views.add_movie, name='addmovie'),
