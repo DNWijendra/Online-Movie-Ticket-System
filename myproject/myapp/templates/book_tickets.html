@@ -210,6 +210,11 @@
       <input type="number" name="Seat count" min="1" max="25" required><br>
       <input type="hidden" name="movie_id" value="{{ selected_movie.movie_id }}">
       <input type="hidden" name="selected_seats" id="selected-seats">
+      <label>Total Ticket Price : Rs. </label>
+      <input type="text" name="Total Ticket Price" id="total-ticket-price" readonly><br>
+      <input type="hidden" name="movie_id" value="{{ selected_movie.movie_id }}">
+      <input type="hidden" name="selected_seats" id="selected-seats">
+      <br>
       <button type="button" onclick="openPaymentModal()">Proceed to Payment</button>
     </form>
       {% endif %}
@@ -223,6 +228,10 @@
         <h2>Payment Form</h2>
         <form id="payment-form" action="{% url 'process_payment' %}" method="post">
           {% csrf_token %}
+          <label>Total Price</label>
+          <input type="text" id="payment-total-price" name="total_price" readonly><br>
+          <input type="hidden" name="movie_id" value="{{ selected_movie.movie_id }}">
+          <input type="hidden" name="selected_seats" id="payment-selected-seats">
           <label>Card Number</label>
           <input type="text" name="card_number" required><br>
           <label>Expiry Date</label>
@@ -256,6 +265,7 @@
           <input type="text" name="cvv" required><br>
           <input type="hidden" name="movie_id" value="{{ selected_movie.movie_id }}">
           <input type="hidden" name="selected_seats" id="payment-selected-seats">
+          <input type="hidden" name="booking_id" value="{{ booking.id }}">
           <button type="submit">Book Tickets</button>
         </form>
       </div>
@@ -267,10 +277,11 @@
           <div id="confirmationModal" class="modal">
             <div class="modal-content">
               <span class="close" onclick="closeConfirmationModal()">&times;</span>
-              <h2>Booking Confirmed</h2>
-              <p>Your booking has been confirmed. Thank you for your purchase!</p>
-              <button onclick="redirectToHomepage()">Exit</button>
+              <h2>Payment Confirmation</h2>
+              <p>Your payment was successful! Your tickets have been booked.</p>
+              <button onclick="redirectToHome()">Exit</button>
             </div>
+          </div>
           </div>
     
           </div>
@@ -338,6 +349,9 @@
     const seats = document.querySelectorAll('.seat');
     const selectedSeatsInput = document.getElementById('selected-seats');
     const seatCountInput = document.querySelector('input[name="Seat count"]');
+    const totalTicketPriceInput = document.getElementById('total-ticket-price');
+    const paymentTotalPriceInput = document.getElementById('payment-total-price');
+    
 
     let selectedSeats = [];
 
@@ -357,6 +371,10 @@
 
           selectedSeatsInput.value = selectedSeats.join(',');
           seatCountInput.value = selectedSeats.length;
+
+          totalTicketPriceInput.value = selectedSeats.length * 1000; // Assuming Rs. 1000 per ticket
+          totalTicketPriceInput.value = totalPrice;
+          paymentTotalPriceInput.value = totalPrice;
         }
       });
     });
@@ -366,16 +384,15 @@
     const modal = document.getElementById("paymentModal");
     const selectedSeatsInput = document.getElementById('selected-seats');
     const paymentSelectedSeatsInput = document.getElementById('payment-selected-seats');
+    const totalTicketPriceInput = document.getElementById('total-ticket-price');
+    const paymentTotalPriceInput = document.getElementById('payment-total-price');
 
     paymentSelectedSeatsInput.value = selectedSeatsInput.value;
+    paymentTotalPriceInput.value = totalTicketPriceInput.value;
     modal.style.display = "block";
   }
 
-  function closePaymentModal() {
-    const modal = document.getElementById("paymentModal");
-    modal.style.display = "none";
-  }
-
+  
   function openConfirmationModal() {
     const modal = document.getElementById("confirmationModal");
     modal.style.display = "block";
@@ -389,6 +406,7 @@
   function redirectToHomepage() {
     window.location.href = "{% url 'home' %}";
   }
+
 
   // Close the modals when the user clicks anywhere outside of them
   window.onclick = function(event) {

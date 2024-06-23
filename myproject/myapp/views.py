@@ -96,12 +96,15 @@ def booktickets(request):
                 col=seat['col']
             )
             selected_movie.booked_seats.add(booked_seat)
+
+        total_ticket_price = len(selected_seats) * 1000  # Assuming Rs. 1000 per ticket    
         
         # Show confirmation modal
         context = {
             'movies': movies,
             'selected_movie': selected_movie,
-            'show_confirmation': True
+            'show_confirmation': True,
+            'total_ticket_price': total_ticket_price
         }
         return render(request, "book_tickets.html", context)
 
@@ -133,3 +136,5 @@ def process_payment(request):
         return redirect('booktickets')
 
     return redirect('booktickets')
+
+
