@@ -73,8 +73,8 @@
         {% for movie in movies %}
         <tr>
             <td>{{ movie.movie_name }}</td>
-            <!-- <td><img src="{{ movie.image.url }}" height="50px" width="50px"></td> -->
-             <td><img src="{{ movie.image }}" alt="Profile Image"></td>
+            <td><img src="{{ movie.image.url }}" height="80px" width="80px"></td>
+             <!-- <td><img src="{{ movie.image.url }}" alt="Profile Image"></td> -->
             <td>{{ movie.ticket_price }}</td>
             <td>{{ movie.type }}</td>
             <td>{{ movie.show_time }}</td>

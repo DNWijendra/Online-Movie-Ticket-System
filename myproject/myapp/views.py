@@ -48,16 +48,16 @@ def user_signup(request):
 #     return render(request,'signup.html',{'form':form})
 
 #admin login
-def user_login(request):
-    if request.method == 'POST':
-        user = request.POST.get('username')
-        pwd = request.POST.get('password')
-        user = authenticate(username=user,password=pwd)
-        if user is not None:
-            return redirect('Login_home')
-        else:
-            return render(request, 'login.html', {'error': 'Invalid credentials'})
-    return render(request,'login.html')
+# def user_login(request):
+#     if request.method == 'POST':
+#         user = request.POST.get('username')
+#         pwd = request.POST.get('password')
+#         user = authenticate(username=user,password=pwd)
+#         if user is not None:
+#             return redirect('Login_home')
+#         else:
+#             return render(request, 'login.html', {'error': 'Invalid credentials'})
+#     return render(request,'login.html')
 
 def user_login(request):
     if request.method == 'POST':
@@ -84,8 +84,8 @@ def admin_login(request):
     return render(request, 'admin_login.html')
 
 def user_home(request):
-    # movies = Movie.objects.all()
-    return render(request,'user_home.html')
+    movies = Movie.objects.all()
+    return render(request,'user_home.html',{'movies':movies})
 
 def home(request):
     movies = Movie.objects.all()
@@ -96,7 +96,7 @@ def Login_home(request):
     movies = Movie.objects.all()
     return render(request,'Login_home.html',{'movies':movies})
 
-def user_logout(request):
+def logout(request):
     return redirect('home')
 
 def add_movie(request):

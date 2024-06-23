@@ -26,7 +26,6 @@ urlpatterns = [
     path('', home, name='home'),
     path('home/', home, name='home'),
     # path('signup/', signup, name='signup'),
-
     path('login/', user_login, name='login'),
     
     path('user/login/', views.user_login, name='user_login'),
@@ -35,7 +34,7 @@ urlpatterns = [
     path('user/signup/', views.user_signup, name='user_signup'),
     path('user_home/', views.user_home, name='user_home'),
     path('Login_home/', views.Login_home, name='Login_home'),
-    path('logout/', user_logout, name='logout'),
+    path('logout/', views.logout, name='logout'),
     path('addmovie/', views.add_movie, name='addmovie'),
     path('booktickets/', views.booktickets, name='booktickets'),
     path('deletemovie/<int:movie_id>', views.delete_movie, name='deletemovie'),
