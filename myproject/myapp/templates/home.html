@@ -63,14 +63,13 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-            <li><a class="nav-link scrollto " href="{% url 'booktickets' %}">Book Tickets</a></li>
-            <li><a class="nav-link scrollto active" a href="{% url 'login' %}">Login</a>
-                <!-- {% if user.is_authenticated %}
-                    <a href="{% url 'login' %}">Login</a>
-                {% else %}
-                    <a href="{% url 'logout' %}">Logout</a>
-                {% endif %}</a> -->
-              </li>
+            <li><a class="nav-link scrollto active" href="">Book Tickets</a></li>
+            <li class="dropdown">Accounts<i class="bi bi-chevron-right"></i>
+              <ul>
+                <li><a href="{% url 'user_login' %}">User Login</a></li>
+                <li><a href="{% url 'admin_login' %}">Admin Login</a></li>
+              </ul>
+            </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -133,15 +132,15 @@
         </div>
         <div class="cards-container">
           {% for movie in movies %}
-          <div class="card">
-            <img src="{{ movie.image.url }}" class="img-fluid" alt="{{ movie.movie_name }}">
-            <div class="portfolio-info">
-              <h4>{{ movie.movie_name }}</h4>
-              <p>Price: {{ movie.ticket_price }}</p>
-              <p>Type: {{ movie.type }}</p>
-              <p>Show Time: {{ movie.show_time }}</p>
-              <p>Language: {{ movie.language }}</p>
-            </div>
+            <div class="card">
+                  <img src="{{ movie.image.url }}" alt="{{ movie.movie_name }}">
+              <div class="portfolio-info">
+                  <h4>{{ movie.movie_name }}</h4>
+                  <p>Price: {{ movie.ticket_price }}</p>
+                  <p>Type: {{ movie.type }}</p>
+                  <p>Show Time: {{ movie.show_time }}</p>
+                  <p>Language: {{ movie.language }}</p>
+              </div>
           </div>
           {% endfor %}
         </div>
