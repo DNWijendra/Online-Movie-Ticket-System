@@ -42,6 +42,7 @@ class Movie(models.Model):
     language = models.CharField(max_length=10, choices=LANGUAGE_CHOICES, null=True)
     release_date = models.DateField(null=True)
     screening_type = models.CharField(max_length=20, choices=SCREENING_CHOICES, null=True)
+    trailer_url = models.URLField(max_length=100,null=True)
 
     def __str__(self):
         return self.movie_name
