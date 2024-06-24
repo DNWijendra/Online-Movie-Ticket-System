@@ -88,8 +88,13 @@ def user_home(request):
     return render(request,'user_home.html',{'movies':movies})
 
 def home(request):
-    movies = Movie.objects.all()
-    return render(request,'home.html',{'movies':movies})
+    now_screening_movies = Movie.objects.filter(screening_type='Now Screening')
+    coming_soon_movies = Movie.objects.filter(screening_type='Coming Soon')
+    context = {
+        'now_showing_movies': now_screening_movies,
+        'coming_soon_movies': coming_soon_movies,
+    }
+    return render(request, 'home.html', context)
 
 #admin login home to add/remove/edit content
 def Login_home(request):
