@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
+from django.utils import timezone
 
 def admin_signup(request):
     if request.method == 'POST':
@@ -84,8 +85,12 @@ def admin_login(request):
     return render(request, 'admin_login.html')
 
 def user_home(request):
-    movies = Movie.objects.all()
-    return render(request,'user_home.html',{'movies':movies})
+    today = timezone.now().date()
+    now_showing_movies = Movie.objects.filter(release_date__lte=today)
+    context = {
+        'movies': now_showing_movies,
+    }
+    return render(request, 'user_home.html', context)
 
 def home(request):
     now_screening_movies = Movie.objects.filter(screening_type='Now Screening')
