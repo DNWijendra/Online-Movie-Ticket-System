@@ -178,18 +178,19 @@ h6 {
 }
 
 #header.header-scrolled {
-  background: rgba(5, 87, 158, 0.9);
+  background: #525252;
   top: 0;
 }
 
 #header .logo {
-  font-size: 30px;
+  font-size: 45px;
   margin: 0;
   padding: 0;
   line-height: 1;
-  font-weight: 400;
+  font-weight: bold;
   letter-spacing: 2px;
-  text-transform: uppercase;
+  text-transform: none;
+  font-family: cursive;
 }
 
 #header .logo a {
@@ -478,7 +479,6 @@ h6 {
   height: 80vh;
   overflow: hidden;
   position: relative;
-  background: url("../img/hero-bg.jpg") top center;
   background-size: cover;
   position: relative;
   margin-bottom: -90px;
@@ -488,7 +488,7 @@ h6 {
 
 #hero:before {
   content: "";
-  background: rgba(6, 101, 183, 0.9);
+  background: #313131;
   position: absolute;
   bottom: 0;
   top: 0;
@@ -587,6 +587,7 @@ h6 {
 section {
   padding: 60px 0;
   overflow: hidden;
+  background-color: #313131;
 }
 
 .section-bg {
@@ -600,11 +601,11 @@ section {
 
 .section-title h2 {
   font-size: 32px;
-  font-weight: bold;
+  font-weight: 450;
   text-transform: uppercase;
   margin-bottom: 20px;
   padding-bottom: 0;
-  color: #054a85;
+  color: #ffffff;
 }
 
 .section-title p {
@@ -2250,7 +2251,7 @@ section {
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  background: #05579e;
+  background: #525252;
   padding: 0 0 30px 0;
   color: #fff;
   font-size: 14px;
@@ -2304,7 +2305,7 @@ section {
 }
 
 #footer .footer-top {
-  background: #065fad;
+  background: #414141;
   padding: 60px 0 30px 0;
 }
 
