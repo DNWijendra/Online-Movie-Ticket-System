@@ -22,7 +22,7 @@ class Movie(models.Model):
 
     SCREENING_CHOICES = [
         ('Now Screening', 'Now Screening'),
-        ('Comming Soon', 'Comming Soon'),
+        ('Coming Soon', 'Coming Soon'),
     ]
 
     SHOW_TIMES = [
