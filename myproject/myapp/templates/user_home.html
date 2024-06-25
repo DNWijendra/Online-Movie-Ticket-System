@@ -63,7 +63,7 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-            <li><a class="nav-link scrollto active" href="">View Booked Tickets</a></li>
+            <li><a class="nav-link scrollto" href="{% url 'view_profile' %}">View Booked Tickets</a></li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -136,7 +136,7 @@
               <p>Type: {{ movie.type }}</p>
               <p>Show Time: {{ movie.show_time }}</p>
               <p>Language: {{ movie.language }}</p>
-              <button><a class="nav-link scrollto active" href="{% url 'booktickets' movie.movie_name %}">Book Tickets</a></button>
+              <button><a class="nav-link scrollto active" href="{% url 'booktickets' %}">Book Tickets</a></button>
             </div>
           </div>
           {% endfor %}

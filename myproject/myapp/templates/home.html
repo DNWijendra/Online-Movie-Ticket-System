@@ -145,7 +145,6 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-            <li><a class="nav-link scrollto active" href="">Book Tickets</a></li>
             <li class="dropdown">My Account<i class="bi bi-chevron-right"></i>
               <ul>
                 <li><a href="{% url 'user_login' %}">User Login</a></li>
@@ -206,13 +205,14 @@
 
     <br><br><br>
     <!-- ======= Portfoio Section ======= -->
-    <section id="portfolio" class="portfoio">
-      <div class="container" data-aos="fade-up">
-
+   <!-- ======= Now Showing Section ======= -->
+   <section id="portfolio" class="portfolio">
+    <div class="container" data-aos="fade-up">
         <div class="section-title">
-          <h2>Now Showing</h2>
+            <h2>Now Showing</h2>
         </div>
         <div class="cards-container">
+<<<<<<< HEAD
           {% for movie in movies %}
           <div class="card">
             <img src="{{ movie.image.url }}" class="img-fluid" alt="{{ movie.movie_name }}">
@@ -227,18 +227,56 @@
                 <a href="{{ movie.buy_tickets_url }}">Buy Tickets</a>
                 <a href="{{ movie.trailer_url }}" target="_blank">Watch Trailer</a>
               </div>
+=======
+            {% for movie in now_showing_movies %}
+            <div class="card">
+                <img src="{{ movie.image.url }}" class="img-fluid" alt="{{ movie.movie_name }}">
+                <h3>{{ movie.movie_name }}</h3>
+                <div class="overlay">
+                    <div class="details">
+                        <p>Genre: {{ movie.type }}</p>
+                        <p>Language: {{ movie.language }}</p>
+                        <p>Show Time: {{ movie.show_time }}</p>
+                    </div>
+                    <div class="text">
+                        <a href="#">Buy Tickets</a>
+                        <a href="{{ movie.trailer_url }}">Watch Trailer</a>
+                    </div>
+                </div>
+>>>>>>> 2619cd2e085204a8c2f01df465940f72e7933269
             </div>
-          </div>
-          {% endfor %}
+            {% endfor %}
         </div>
+    </div>
+</section>
 
-        <div class="row portfolio-container">
-         <!-- <h1>sdfsdsf</h1> -->
+<!-- ======= Coming Soon Section ======= -->
+<section id="coming-soon" class="coming-soon">
+    <div class="container" data-aos="fade-up">
+        <div class="section-title">
+            <h2>Coming Soon</h2>
         </div>
-
-      </div>
-    </section>
-    <!-- End Portfoio Section -->
+        <div class="cards-container">
+            {% for movie in coming_soon_movies %}
+            <div class="card">
+                <img src="{{ movie.image.url }}" class="img-fluid" alt="{{ movie.movie_name }}">
+                <h3>{{ movie.movie_name }}</h3>
+                <div class="overlay">
+                    <div class="details">
+                        <p>Genre: {{ movie.type }}</p>
+                        <p>Language: {{ movie.language }}</p>
+                        <p>Release Date: {{ movie.release_date }}</p>
+                    </div>
+                    <div class="text">
+                        <a href="{{ movie.trailer_url }}">Watch Trailer</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- End Portfolio Section -->
 
   </main><!-- End #main -->
 
