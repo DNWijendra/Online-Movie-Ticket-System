@@ -120,10 +120,6 @@ def add_movie(request):
     return render(request,"add_movie.html",{'form':form})
 
 def booktickets(request):
-    # movie = get_object_or_404(Movie, movie_name=movie_name)
-    # context = {
-    #     'movie_name': movie_name,  # Pass movie_name to template
-    # }
     return render(request,"book_tickets.html")
 
 def delete_movie(request,movie_id):
@@ -214,3 +210,6 @@ def process_payment(request):
         return redirect('booktickets')
 
     return redirect('booktickets')
+
+def view_profile(request):
+    return render(request, 'view_profile.html')
