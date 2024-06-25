@@ -2,12 +2,6 @@ from django.shortcuts import render,HttpResponse,redirect,get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from.forms import *
-<<<<<<< HEAD
-from .models import Movie, BookedSeat
-from django.http import JsonResponse
-# Create your views here.
-def signup(request):
-=======
 
 from django.contrib.auth.decorators import login_required
 
@@ -17,7 +11,6 @@ from django.contrib.auth import login, authenticate
 from django.utils import timezone
 
 def admin_signup(request):
->>>>>>> 88df72d6177384df391cc8b6cd9f45053b515c80
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -126,15 +119,12 @@ def add_movie(request):
         form = New_Movie_Form()
     return render(request,"add_movie.html",{'form':form})
 
-<<<<<<< HEAD
-=======
-def booktickets(request,movie_name):
-    movie = get_object_or_404(Movie, movie_name=movie_name)
-    context = {
-        'movie_name': movie_name,  # Pass movie_name to template
-    }
-    return render(request,"book_tickets.html", {'movie': movie})
->>>>>>> 88df72d6177384df391cc8b6cd9f45053b515c80
+def booktickets(request):
+    # movie = get_object_or_404(Movie, movie_name=movie_name)
+    # context = {
+    #     'movie_name': movie_name,  # Pass movie_name to template
+    # }
+    return render(request,"book_tickets.html")
 
 def delete_movie(request,movie_id):
     movie = get_object_or_404(Movie, movie_id=movie_id)
@@ -156,9 +146,9 @@ def update_movie(request, movie_id):
             form.save()
             return redirect('Login_home')
     else:
-<<<<<<< HEAD
-        return render(request,'edit_moive.html',{data:data})
-
+        form = New_Movie_Form(instance=movie_instance)
+    
+    return render(request, 'edit_movie.html', {'form': form, 'movie_id': movie_id})
 
 def booktickets(request):
     movies = Movie.objects.all()
@@ -183,9 +173,10 @@ def booktickets(request):
                 col=seat['col']
             )
             selected_movie.booked_seats.add(booked_seat)
-
-        total_ticket_price = len(selected_seats) * 1000  # Assuming Rs. 1000 per ticket    
         
+        # Calculate total ticket price
+        total_ticket_price = len(selected_seats) * 1000  # Assuming Rs. 1000 per ticket
+
         # Show confirmation modal
         context = {
             'movies': movies,
@@ -223,14 +214,3 @@ def process_payment(request):
         return redirect('booktickets')
 
     return redirect('booktickets')
-
-
-=======
-        form = New_Movie_Form(instance=movie_instance)
-    
-<<<<<<< HEAD
-    return render(request, 'edit_movie.html', {'form': form, 'movie_id': movie_id})
->>>>>>> 88df72d6177384df391cc8b6cd9f45053b515c80
-=======
-    return render(request, 'edit_movie.html', {'form': form, 'movie_id': movie_id})
->>>>>>> 5f01260b1f620522c28892c7adb890ea0d71bebc

@@ -22,7 +22,7 @@ class Movie(models.Model):
 
     SCREENING_CHOICES = [
         ('Now Screening', 'Now Screening'),
-        ('Coming Soon', 'Coming Soon'),
+        ('Comming Soon', 'Comming Soon'),
     ]
 
     SHOW_TIMES = [
@@ -37,13 +37,13 @@ class Movie(models.Model):
     movie_name = models.CharField(max_length=30, null=True)
     ticket_price = models.CharField(max_length=8, null=True)
     image = models.FileField(upload_to='profile', null=True, blank=True)
-<<<<<<< HEAD
-    show_time = models.CharField(max_length=15, null=True)
-    type = models.CharField(max_length=10, null=True)
-    language = models.CharField(max_length=10, null=True)
-    release_date = models.CharField(max_length=10, null=True)
-    screening_type = models.CharField(max_length=20, null=True)
+    show_time = models.CharField(max_length=15, choices=SHOW_TIMES, null=True)
+    type = models.CharField(max_length=20, choices=MOVIE_TYPES, null=True)
+    language = models.CharField(max_length=10, choices=LANGUAGE_CHOICES, null=True)
+    release_date = models.DateField(null=True)
+    screening_type = models.CharField(max_length=20, choices=SCREENING_CHOICES, null=True)
     booked_seats = models.ManyToManyField('BookedSeat', blank=True)
+
 
     def __str__(self):
         return self.movie_name
@@ -54,15 +54,3 @@ class BookedSeat(models.Model):
 
     def __str__(self):
         return f"{self.row}{self.col}"
-
-
-=======
-    show_time = models.CharField(max_length=15, choices=SHOW_TIMES, null=True)
-    type = models.CharField(max_length=20, choices=MOVIE_TYPES, null=True)
-    language = models.CharField(max_length=10, choices=LANGUAGE_CHOICES, null=True)
-    release_date = models.DateField(null=True)
-    screening_type = models.CharField(max_length=20, choices=SCREENING_CHOICES, null=True)
-
-    def __str__(self):
-        return self.movie_name
->>>>>>> 88df72d6177384df391cc8b6cd9f45053b515c80

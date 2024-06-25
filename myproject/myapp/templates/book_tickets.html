@@ -9,6 +9,7 @@
     <meta content="" name="keywords">
         
     {% load static %}
+    
         
     <!-- Favicons -->
     <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
@@ -29,12 +30,18 @@
        
     <!-- Template Main CSS File -->
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
-<<<<<<< HEAD
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     {% load seat_tags %}
+    <style>
+      #message {
+          display: none;
+          margin-top: 20px;
+          font-size: 18px;
+          color: green;
+      }
 
-<style>
-  .seat-container {
+      .seat-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -50,6 +57,10 @@
       cursor: pointer;
       justify-content: center;
       align-items: center;
+  }
+
+   .label-text {
+    color: #fff;
   }
 
   .seat.selected {
@@ -122,20 +133,42 @@
       text-decoration: none;
       cursor: pointer;
   }
-</style>
 
-=======
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-      #message {
-          display: none;
-          margin-top: 20px;
-          font-size: 18px;
-          color: green;
+
+  form {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
       }
+
+      form label {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+
+      select, input[type="text"], input[type="email"], input[type="number"], input[type="date"], button {
+        flex: 1 1 200px;
+        margin-top: 10px;
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      button {
+        background-color: #343a40;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        flex: 1 1 100%;
+      }
+
+      button:hover {
+        background-color: #555;
+      }
+
     </style>
->>>>>>> 88df72d6177384df391cc8b6cd9f45053b515c80
 </head>
 <body>
     
@@ -160,250 +193,134 @@
     
     <main id="main">
         <br><br><br>
-<<<<<<< HEAD
-        <!-- ======= Portfoio Section ======= -->
+        <!-- ======= Portfolio Section ======= -->
         <section id="portfolio" class="portfoio">
-          <div class="container" data-aos="fade-up">
-    
-            <div class="section-title">
-              <h2>Book Tickets</h2>
-            </div>
-            <!-- <a href="/home">Home page</a> -->
-    <br><br>
-     <!-- Movie Selection -->
+            <div class="container" data-aos="fade-up">
+      
+              <div class="section-title">
+                <h2>Book Tickets</h2>
+              </div>
+              <!-- <a href="/home">Home page</a> -->
+      <br><br>
+       <!-- Movie Selection -->
      {% if selected_movie %}
-    <h3>{{ selected_movie.movie_name }}</h3>
-    {% else %}
-    <form action="{% url 'booktickets' %}" method="get">
-      <label for="movie_id">Select Movie:</label>
-      <select name="movie_id" id="movie_id">
-        {% for movie in movies %}
-        <option value="{{ movie.movie_id }}">{{ movie.movie_name }}</option>
-        {% endfor %}
-      </select>
-      <button type="submit">Next</button>
-    </form>
-    {% endif %}
-
-
- <!-- Seat Selection -->
- {% if selected_movie %}
-    <div class="seat-container">
-      <div class="screen">Screen</div>
-      {% for row in 'ABCDEFGH' %}
-      <div class="seat-row">
-        <span class="seat-label">{{ row }}</span>
-        {% for col in '123456789' %}
-        {% with seat=row|add:col %}
-        <div class="seat {% if selected_movie|is_reserved:seat %}reserved{% endif %}" data-row="{{ row }}" data-col="{{ col }}">
-          <span class="seat-label">{{ row }}{{ col }}</span>
-        </div>
-        {% endwith %}
-        {% endfor %}
+     <h3 class="label-text">{{ selected_movie.movie_name }}</h3>
+     {% else %}
+     <form action="{% url 'booktickets' %}" method="get">
+       <label for="movie_id">Select Movie:</label>
+       <select name="movie_id" id="movie_id">
+         {% for movie in movies %}
+         <option value="{{ movie.movie_id }}">{{ movie.movie_name }}</option>
+         {% endfor %}
+       </select>
+       <button type="submit">Next</button>
+     </form>
+     {% endif %}
+ 
+  <!-- Seat Selection -->
+  {% if selected_movie %}
+  <div class="seat-container">
+    <div class="screen">Screen</div>
+    {% for row in 'ABCDEFGH' %}
+    <div class="seat-row">
+      <span class="seat-label">{{ row }}</span>
+      {% for col in '123456789' %}
+      {% with seat=row|add:col %}
+      <div class="seat {% if selected_movie|is_reserved:seat %}reserved{% endif %}" data-row="{{ row }}" data-col="{{ col }}">
+        <span class="seat-label">{{ row }}{{ col }}</span>
       </div>
+      {% endwith %}
       {% endfor %}
     </div>
-    <br><br>
-
-    <form id="booking-form" action="{% url 'booktickets' %}" method="post">
-      {% csrf_token %}
-      <label>Name</label>
-      <input type="text" name="Name" required><br>
-      <label>Contact Number</label>
-      <input type="text" name="Contact Number" required><br>
-      <label>Email</label>
-      <input type="email" name="Email"><br>
-      <label>Date</label>
-      <input type="date" name="Date" required><br>
-      <label>Seat count</label>
-      <input type="number" name="Seat count" min="1" max="25" required><br>
-      <input type="hidden" name="movie_id" value="{{ selected_movie.movie_id }}">
-      <input type="hidden" name="selected_seats" id="selected-seats">
-      <label>Total Ticket Price : Rs. </label>
-      <input type="text" name="Total Ticket Price" id="total-ticket-price" readonly><br>
-      <input type="hidden" name="movie_id" value="{{ selected_movie.movie_id }}">
-      <input type="hidden" name="selected_seats" id="selected-seats">
-      <br>
-      <button type="button" onclick="openPaymentModal()">Proceed to Payment</button>
-    </form>
-      {% endif %}
-
-    <br><br>
-
-
-    <div id="paymentModal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="closePaymentModal()">&times;</span>
-        <h2>Payment Form</h2>
-        <form id="payment-form" action="{% url 'process_payment' %}" method="post">
-          {% csrf_token %}
-          <label>Total Price</label>
-          <input type="text" id="payment-total-price" name="total_price" readonly><br>
-          <input type="hidden" name="movie_id" value="{{ selected_movie.movie_id }}">
-          <input type="hidden" name="selected_seats" id="payment-selected-seats">
-          <label>Card Number</label>
-          <input type="text" name="card_number" required><br>
-          <label>Expiry Date</label>
-          <select name="expiration_month" id="expiration_month" required>
-            <option value="" disabled selected>Select month</option>
-            <option value="01">January</option>
-            <option value="02">February</option>
-            <option value="03">March</option>
-            <option value="04">April</option>
-            <option value="05">May</option>
-            <option value="06">June</option>
-            <option value="07">July</option>
-            <option value="08">August</option>
-            <option value="09">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-        </select>
-        <select name="expiration_year" id="expiration_year" required>
-            <option value="" disabled selected>Select year</option>
-            <option value="01">2024</option>
-            <option value="02">2025</option>
-            <option value="03">2026</option>
-            <option value="04">2027</option>
-            <option value="05">2028</option>
-            <option value="06">2029</option>
-            <option value="07">2030</option>
-        </select>
-        <br><br>
-          <label>CVV</label>
-          <input type="text" name="cvv" required><br>
-          <input type="hidden" name="movie_id" value="{{ selected_movie.movie_id }}">
-          <input type="hidden" name="selected_seats" id="payment-selected-seats">
-          <input type="hidden" name="booking_id" value="{{ booking.id }}">
-          <button type="submit">Book Tickets</button>
-        </form>
-      </div>
-    </div>
-    </form>
-
-          <br><br>
-
-          <div id="confirmationModal" class="modal">
-            <div class="modal-content">
-              <span class="close" onclick="closeConfirmationModal()">&times;</span>
-              <h2>Payment Confirmation</h2>
-              <p>Your payment was successful! Your tickets have been booked.</p>
-              <button onclick="redirectToHome()">Exit</button>
-            </div>
-          </div>
-          </div>
-    
-          </div>
-        </section>
-        <!-- End Portfoio Section -->
-    
-      </main><!-- End #main -->
-    
-      <!-- ======= Footer ======= -->
-      <footer id="footer">
-    
-        <div class="footer-top">
-          <div class="container">
-            <div class="row">
-    
-              <div class="col-lg-4 col-md-6 footer-contact">
-                <h4>Contact Us</h4>
-                <p>
-                  A108  <br>
-                  Galle Rd<br>
-                  Colombo <br><br>
-                  <strong>Phone:</strong> +94 11 247 157<br>
-                  <strong>Email:</strong> dreamflix@dflix.com<br>
-                </p>
-    
-              </div>
-    
-              <div class="col-lg-4 col-md-6 footer-info">
-                <h3>About DreamFlix</h3>
-                <p>Welcome to DreamFlix! We are your go-to source for the latest movie news, reviews, and insights. Join us in celebrating the magic of cinema!</p>
-                <div class="social-links mt-3">
-                  <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                  <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-=======
-        <!-- ======= Portfolio Section ======= -->
-        <section id="portfolio" class="portfolio">
-            <div class="container" data-aos="fade-up">
-                <div class="section-title">
-                    <h2>Book Ticket for {{ movie.movie_name }}</h2>
-                </div>
-                
-                <div class="container mt-5">
-                    <h2>Reservation Form</h2>
-                    <form id="reservationForm">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="Name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="contactNumber">Contact Number</label>
-                            <input type="text" class="form-control" id="contactNumber" name="Contact Number" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="Email">
-                        </div>
-                        <div class="form-group">
-                            <label for="date">Date</label>
-                            <input type="date" class="form-control" id="date" name="Date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="seatCount">Seat Count</label>
-                            <input type="number" class="form-control" id="seatCount" name="Seat count" min="1" max="25" required>
-                        </div>
-                        <br><br>
-                        
-                        <h2>Payment Information</h2>
-                        
-                        <div class="form-group">
-                            <label for="cardNumber">Card Number</label>
-                            <input type="text" class="form-control" id="cardNumber" name="Card Number" required pattern="\d{4}\d{4}\d{4}\d{4}" placeholder="1234 1234 1234 1234" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cvc">CVC</label>
-                            <input type="text" class="form-control" id="cvc" name="CVC" required pattern="\d{3,4}" placeholder="123" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="expirationMonth">Expiration Date</label>
-                            <div class="d-flex">
-                                <select class="form-control mr-2" name="expiration_month" id="expiration_month" required>
-                                    <option value="" disabled selected>Select month</option>
-                                    <option value="01">January</option>
-                                    <option value="02">February</option>
-                                    <option value="03">March</option>
-                                    <option value="04">April</option>
-                                    <option value="05">May</option>
-                                    <option value="06">June</option>
-                                    <option value="07">July</option>
-                                    <option value="08">August</option>
-                                    <option value="09">September</option>
-                                    <option value="10">October</option>
-                                    <option value="11">November</option>
-                                    <option value="12">December</option>
-                                </select>
-                                <select class="form-control" name="expiration_year" id="expiration_year" required>
-                                    <option value="" disabled selected>Select year</option>
-                                    <option value="2024">2024</option>
-                                    <option value="2025">2025</option>
-                                    <option value="2026">2026</option>
-                                    <option value="2027">2027</option>
-                                    <option value="2028">2028</option>
-                                    <option value="2029">2029</option>
-                                    <option value="2030">2030</option>
-                                </select>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Book Tickets</button>
-                        <div id="message">Your reservation is successful!</div>
-                    </form>
-                </div>
-                <br><br>
-            </div>
-        </section>
+    {% endfor %}
+  </div>
+     <br><br>
+ 
+     <form id="booking-form" action="{% url 'booktickets' %}" method="post">
+       {% csrf_token %}
+       <label class="label-text">Name</label>
+       <input type="text" name="Name" required><br>
+       <label class="label-text">Contact Number</label>
+       <input type="text" name="Contact Number" required><br>
+       <label class="label-text">Email</label>
+       <input type="email" name="Email"><br>
+       <label class="label-text">Date</label>
+       <input type="date" name="Date" required><br>  
+       <label class="label-text">Seat count</label>
+       <input type="number" name="Seat count" id="seat-count" min="1" max="25" required readonly>
+       <input type="hidden" name="movie_id" value="{{ selected_movie.movie_id }}">
+       <input type="hidden" name="selected_seats" id="selected-seats">
+       <label class="label-text">Total Ticket Price</label>
+       <input type="text" name="Total Ticket Price" id="total-ticket-price" readonly><br>
+       <input type="hidden" name="movie_id" value="{{ selected_movie.movie_id }}">
+       <input type="hidden" name="selected_seats" id="selected-seats">
+       <button type="button" onclick="openPaymentModal()">Proceed to Payment</button>
+     </form>
+       {% endif %}
+ 
+     <br><br>
+ 
+ 
+     <div id="paymentModal" class="modal">
+       <div class="modal-content">
+         
+         <h2>Payment Form</h2>
+         <form id="payment-form" action="{% url 'process_payment' %}" method="post">
+           {% csrf_token %}
+           <label>Card Number</label>
+           <input type="text" name="Card Number" required="" pattern="\d{4}\d{4}\d{4}\d{4}" placeholder="1234 1234 1234 1234">
+           <label>Expiry Date</label>
+           <select name="expiration_month" id="expiration_month" required>
+             <option value="" disabled selected>Select month</option>
+             <option value="01">January</option>
+             <option value="02">February</option>
+             <option value="03">March</option>
+             <option value="04">April</option>
+             <option value="05">May</option>
+             <option value="06">June</option>
+             <option value="07">July</option>
+             <option value="08">August</option>
+             <option value="09">September</option>
+             <option value="10">October</option>
+             <option value="11">November</option>
+             <option value="12">December</option>
+           </select>
+           <select name="expiration_year" id="expiration_year" required>
+             <option value="" disabled selected>Select year</option>
+             <option value="2024">2024</option>
+             <option value="2025">2025</option>
+             <option value="2026">2026</option>
+             <option value="2027">2027</option>
+             <option value="2028">2028</option>
+             <option value="2029">2029</option>
+             <option value="2030">2030</option>
+           </select>
+           <br><br>
+           <label>CVV</label>
+           <input type="text" name="cvv" required="" pattern="\d{3}" placeholder="123">
+           <label>Total Price</label>
+           <input type="text" id="payment-total-price" name="total_price" readonly><br>
+           <input type="hidden" name="movie_id" value="{{ selected_movie.movie_id }}">
+           <input type="hidden" name="selected_seats" id="payment-selected-seats">
+           <button type="submit">Book Tickets</button>
+         </form>
+       </div>
+     </div>
+           
+ 
+           <br><br>
+ 
+           <div id="confirmationModal" class="modal">
+             <div class="modal-content">
+               <span class="close" onclick="closeConfirmationModal()">&times;</span>
+               <h2>Booking Confirmed</h2>
+               <p>Your booking has been confirmed. Thank you for your purchase!</p>
+               <button onclick="redirectToHomepage()">Exit</button>
+             </div>
+           </div>
+     
+           </div>
+         </section>
         <!-- End Portfolio Section -->
     </main><!-- End #main -->
     
@@ -430,7 +347,6 @@
                             <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
                         </div>
                     </div>
->>>>>>> 88df72d6177384df391cc8b6cd9f45053b515c80
                 </div>
             </div>
         </div>
@@ -453,13 +369,16 @@
     <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
     <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
     
-<<<<<<< HEAD
-      <!-- Template Main JS File -->
-      <script src="{% static 'assets/js/main.js' %}"></script>
+    <!-- Template Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
 
-      
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
+    <!-- Bootstrap JS and dependencies (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
     const seats = document.querySelectorAll('.seat');
     const selectedSeatsInput = document.getElementById('selected-seats');
     const seatCountInput = document.querySelector('input[name="Seat count"]');
@@ -533,33 +452,8 @@
       confirmationModal.style.display = "none";
     }
   }
-</script>
-    </body>
-    </html>
-    
-=======
-    <!-- Template Main JS File -->
-    <script src="{% static 'assets/js/main.js' %}"></script>
 
-    <!-- Bootstrap JS and dependencies (optional) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <script>
-      document.getElementById("reservationForm").addEventListener("submit", function(event) {
-          event.preventDefault();
-          var form = event.target;
-          var isValid = form.checkValidity();
-          if (isValid) {
-              alert("Your reservation is successful!");
-              document.getElementById("message").style.display = "block";
-          } else {
-              form.reportValidity();
-          }
-      });
-    </script>
+  </script>
     
 </body>
 </html>
->>>>>>> 88df72d6177384df391cc8b6cd9f45053b515c80
