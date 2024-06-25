@@ -2,22 +2,22 @@ from django.db import models
 
 class Movie(models.Model):
     MOVIE_TYPES = [
-        ('Action', 'Action'),
-        ('Comedy', 'Comedy'),
-        ('Drama', 'Drama'),
-        ('Horror', 'Horror'),
-        ('Romance', 'Romance'),
-        ('Sci-Fi', 'Sci-Fi'),
-        ('Thriller', 'Thriller'),
-        ('Musical Fantasy', 'Musical Fantasy'),
-        ('Other', 'Other'),
+        ('action', 'Action'),
+        ('comedy', 'Comedy'),
+        ('drama', 'Drama'),
+        ('horror', 'Horror'),
+        ('romance', 'Romance'),
+        ('sci-fi', 'Sci-Fi'),
+        ('thriller', 'Thriller'),
+        ('musical fantasy', 'Musical Fantasy'),
+        ('other', 'Other'),
     ]
 
     LANGUAGE_CHOICES = [
-        ('English', 'English'),
-        ('Sinhala', 'Sinhala'),
-        ('Tamil', 'Tamil'),
-        ('Hindi', 'Hindi'),
+        ('english', 'English'),
+        ('sinhala', 'Sinhala'),
+        ('tamil', 'Tamil'),
+        ('hindi', 'Hindi'),
     ]
 
     SCREENING_CHOICES = [
@@ -42,8 +42,8 @@ class Movie(models.Model):
     language = models.CharField(max_length=10, choices=LANGUAGE_CHOICES, null=True)
     release_date = models.DateField(null=True)
     screening_type = models.CharField(max_length=20, choices=SCREENING_CHOICES, null=True)
-    trailer_url = models.URLField(max_length=100, null=True)
     booked_seats = models.ManyToManyField('BookedSeat', blank=True)
+
 
     def __str__(self):
         return self.movie_name
