@@ -147,7 +147,7 @@ def update_movie(request, movie_id):
     return render(request, 'edit_movie.html', {'form': form, 'movie_id': movie_id})
 
 def booktickets(request):
-    movies = Movie.objects.all()
+    now_showing_movies = Movie.objects.filter(screening_type='Now Screening')
     selected_movie_id = request.GET.get('movie_id')
     selected_movie = None
     if selected_movie_id:
@@ -175,7 +175,7 @@ def booktickets(request):
 
         # Show confirmation modal
         context = {
-            'movies': movies,
+            'movies': now_showing_movies,
             'selected_movie': selected_movie,
             'show_confirmation': True,
             'total_ticket_price': total_ticket_price
@@ -183,11 +183,12 @@ def booktickets(request):
         return render(request, "book_tickets.html", context)
 
     context = {
-        'movies': movies,
+        'movies': now_showing_movies,
         'selected_movie': selected_movie,
         'show_confirmation': False
     }
     return render(request, "book_tickets.html", context)
+
 
 def process_payment(request):
     if request.method == 'POST':
@@ -210,6 +211,5 @@ def process_payment(request):
         return redirect('booktickets')
 
     return redirect('booktickets')
-
 # def view_profile(request):
 #     return render(request, 'view_profile.html')

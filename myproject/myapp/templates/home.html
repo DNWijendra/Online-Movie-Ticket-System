@@ -131,31 +131,46 @@
             padding: 12px;
             border-radius: 8px;
             }
+
+            #hero {
+            height: 90vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+          }
+
+          .carousel-item img {
+            width: 50%;
+            height: 50vh;
+            object-fit: cover;
+            }  
         </style>
     
     </head>
 <body>
  
 
-    <!-- ======= Header ======= -->
-<header id="header" class="fixed-top d-flex align-items-center ">
-  <div class="container d-flex align-items-center justify-content-between">
-    <h1 class="logo"><a href="#">DreamFlix</a></h1>
+     <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center ">
+    <div class="container d-flex align-items-center justify-content-between">
 
-    <nav id="navbar" class="navbar">
-      <ul>
-        <li class="dropdown">
-          <a href="#" class="nav-link scrollto">My Account<i class="bi bi-chevron-right"></i></a>
-          <ul>
-            <li><a href="{% url 'user_login' %}">User Login</a></li>
-            <li><a href="{% url 'admin_login' %}">Admin Login</a></li>
-          </ul>
-        </li>
-      </ul>
-      <i class="bi bi-list mobile-nav-toggle"></i>
-    </nav><!-- .navbar -->
-  </div>
-</header><!-- End Header -->
+      <h1 class="logo"><a href="#">DreamFlix</a></h1>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+            <li class="dropdown">My Account<i class="bi bi-chevron-right"></i>
+              <ul>
+                <li><a href="{% url 'user_login' %}">User Login</a></li>
+                <li><a href="{% url 'admin_login' %}">Admin Login</a></li>
+              </ul>
+            </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex justify-cntent-center align-items-center">
@@ -211,21 +226,6 @@
             <h2>Now Showing</h2>
         </div>
         <div class="cards-container">
-          {% for movie in movies %}
-          <div class="card">
-            <img src="{{ movie.image.url }}" class="img-fluid" alt="{{ movie.movie_name }}">
-            <h3>{{ movie.movie_name }}</h3>
-            <div class="overlay">
-              <div class="details">
-                <p>Genre: {{ movie.type }}</p>
-                <p>Language: {{ movie.language }}</p>
-                <p>Show Time: {{ movie.show_time}}</p>
-              </div>
-              <div class="text">
-                <a href="{{ movie.buy_tickets_url }}">Buy Tickets</a>
-                <a href="{{ movie.trailer_url }}" target="_blank">Watch Trailer</a>
-              </div>
-              {% endfor %}
             {% for movie in now_showing_movies %}
             <div class="card">
                 <img src="{{ movie.image.url }}" class="img-fluid" alt="{{ movie.movie_name }}">
@@ -237,7 +237,7 @@
                         <p>Show Time: {{ movie.show_time }}</p>
                     </div>
                     <div class="text">
-                        <!-- <a href="#">Buy Tickets</a> -->
+                        <a href="#">Buy Tickets</a>
                         <a href="{{ movie.trailer_url }}">Watch Trailer</a>
                     </div>
                 </div>
@@ -332,3 +332,4 @@
 
 </body>
 </html>
+

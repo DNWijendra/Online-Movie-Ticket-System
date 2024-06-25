@@ -42,132 +42,166 @@
       }
 
       .seat-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-  }
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 10px;
+      }
 
-  .seat {
-      width: 40px;
-      height: 40px;
-      background-color: #ccc;
-      border: 2px solid #fff;
-      border-radius: 5px;
-      cursor: pointer;
-      justify-content: center;
-      align-items: center;
-  }
+      .seat {
+          width: 40px;
+          height: 40px;
+          background-color: #ccc;
+          border: 2px solid #fff;
+          border-radius: 5px;
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transition: background-color 0.3s ease;
+      }
 
-   .label-text {
-    color: #fff;
-  }
+      .label-text {
+          color: #fff;
+      }
 
-  .seat.selected {
-      background-color: #0880e8;
-  }
+      .seat.selected {
+          background-color: #0880e8;
+      }
 
-  .seat.reserved {
-      background-color: #f00;
-      cursor: not-allowed;
-  }
+      .seat.reserved {
+          background-color: #f00;
+          cursor: not-allowed;
+      }
 
-  .seat-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-  }
+      .seat-row {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: #fff;
+      }
 
-  .seat-label {
-      font-weight: bold;
-      align-content: flex;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  }
+      .seat-label {
+          font-weight: bold;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #000;
+      }
 
-  .screen {
-      background-color: #ccc;
-      height: 50px;
-      width: 80%;
-      margin-top: 20px;
-      margin-bottom: 20px;
-      text-align: center;
-      line-height: 50px;
-      font-weight: bold;
-  }
+      .screen {
+          background-color: #ccc;
+          height: 50px;
+          width: 80%;
+          margin-top: 20px;
+          margin-bottom: 20px;
+          text-align: center;
+          line-height: 50px;
+          font-weight: bold;
+          border-radius: 10px;
+      }
 
-   /* Modal Styles */
-   .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgb(0,0,0);
-      background-color: rgba(0,0,0,0.4);
-      padding-top: 60px;
-  }
+      .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          overflow: auto;
+          background-color: rgb(0,0,0);
+          background-color: rgba(0,0,0,0.4);
+          padding-top: 60px;
+      }
 
-  .modal-content {
-      background-color: #fefefe;
-      margin: 5% auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 80%;
-  }
+      .modal-content {
+          background-color: #fefefe;
+          margin: 5% auto;
+          padding: 20px;
+          border: 1px solid #888;
+          width: 80%;
+          border-radius: 10px;
+      }
 
-  .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-  }
+      .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+      }
 
-  .close:hover,
-  .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-  }
+      .close:hover,
+      .close:focus {
+          color: black;
+          text-decoration: none;
+          cursor: pointer;
+      }
 
+      .container_mt5 {
+          padding: 40px 0;
+      }
 
+      .container-black {
+          background-color: black;
+          color: white;
+          padding: 20px;
+          border-radius: 10px;
+          margin-top: 50px;
+      }
 
-  form {
-        margin-top: 10px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
+      form {
+          margin-top: 10px;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
       }
 
       form label {
-        flex: 0 0 100%;
-        max-width: 100%;
+          flex: 0 0 100%;
+          max-width: 100%;
       }
 
       select, input[type="text"], input[type="email"], input[type="number"], input[type="date"], button {
-        flex: 1 1 200px;
-        margin-top: 10px;
-        padding: 8px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
+          flex: 1 1 200px;
+          margin-top: 10px;
+          padding: 8px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
       }
 
       button {
-        background-color: #343a40;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-        flex: 1 1 100%;
+          background-color: #8a8984;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+          font-size: 20px;
+          flex: 1 1 100%;
+          transition: background-color 0.3s ease;
       }
 
       button:hover {
-        background-color: #555;
+          background-color: #555;
       }
 
+      .section-title h2 {
+          font-size: 32px;
+          font-weight: 700;
+          text-transform: uppercase;
+          text-align: center;
+          margin-bottom: 20px;
+          position: relative;
+          color: #fff;
+      }
+
+      .section-title h2::after {
+          content: '';
+          width: 80px;
+          height: 3px;
+          background: #f82249;
+          display: block;
+          margin: 10px auto;
+      }
     </style>
 </head>
 <body>
@@ -203,109 +237,111 @@
               <!-- <a href="/home">Home page</a> -->
       <br><br>
        <!-- Movie Selection -->
-     {% if selected_movie %}
-     <h3 class="label-text">{{ selected_movie.movie_name }}</h3>
-     {% else %}
-     <form action="{% url 'booktickets' %}" method="get">
-       <label for="movie_id">Select Movie:</label>
-       <select name="movie_id" id="movie_id">
-         {% for movie in movies %}
-         <option value="{{ movie.movie_id }}">{{ movie.movie_name }}</option>
-         {% endfor %}
-       </select>
-       <button type="submit">Next</button>
-     </form>
-     {% endif %}
- 
-  <!-- Seat Selection -->
-  {% if selected_movie %}
-  <div class="seat-container">
-    <div class="screen">Screen</div>
-    {% for row in 'ABCDEFGH' %}
-    <div class="seat-row">
-      <span class="seat-label">{{ row }}</span>
-      {% for col in '123456789' %}
-      {% with seat=row|add:col %}
-      <div class="seat {% if selected_movie|is_reserved:seat %}reserved{% endif %}" data-row="{{ row }}" data-col="{{ col }}">
-        <span class="seat-label">{{ row }}{{ col }}</span>
+       {% if selected_movie %}
+       <h3 class="label-text">{{ selected_movie.movie_name }}</h3>
+       {% else %}
+       <form action="{% url 'booktickets' %}" method="get">
+         <label class="label-text" for="movie_id">Select Movie:</label>
+         <select name="movie_id" id="movie_id">
+           {% for movie in movies %}
+           <option value="{{ movie.movie_id }}">{{ movie.movie_name }}</option>
+           {% endfor %}
+         </select>
+         <button type="submit">Next</button>
+       </form>
+       {% endif %}
+   
+    <!-- Seat Selection -->
+    {% if selected_movie %}
+    <div class="seat-container">
+      <div class="screen">Screen</div>
+      {% for row in 'ABCDEFGH' %}
+      <div class="seat-row">
+        <span class="seat-row">{{ row }}</span>
+        {% for col in '123456789' %}
+        {% with seat=row|add:col %}
+        <div class="seat {% if selected_movie|is_reserved:seat %}reserved{% endif %}" data-row="{{ row }}" data-col="{{ col }}">
+          <span class="seat-label">{{ row }}{{ col }}</span>
+        </div>
+        {% endwith %}
+        {% endfor %}
       </div>
-      {% endwith %}
       {% endfor %}
     </div>
-    {% endfor %}
-  </div>
-     <br><br>
- 
-     <form id="booking-form" action="{% url 'booktickets' %}" method="post">
-       {% csrf_token %}
-       <label class="label-text">Name</label>
-       <input type="text" name="Name" required><br>
-       <label class="label-text">Contact Number</label>
-       <input type="text" name="Contact Number" required><br>
-       <label class="label-text">Email</label>
-       <input type="email" name="Email"><br>
-       <label class="label-text">Date</label>
-       <input type="date" name="Date" required><br>  
-       <label class="label-text">Seat count</label>
-       <input type="number" name="Seat count" id="seat-count" min="1" max="25" required readonly>
-       <input type="hidden" name="movie_id" value="{{ selected_movie.movie_id }}">
-       <input type="hidden" name="selected_seats" id="selected-seats">
-       <label class="label-text">Total Ticket Price</label>
-       <input type="text" name="Total Ticket Price" id="total-ticket-price" readonly><br>
-       <input type="hidden" name="movie_id" value="{{ selected_movie.movie_id }}">
-       <input type="hidden" name="selected_seats" id="selected-seats">
-       <button type="button" onclick="openPaymentModal()">Proceed to Payment</button>
-     </form>
-       {% endif %}
- 
-     <br><br>
- 
- 
-     <div id="paymentModal" class="modal">
-       <div class="modal-content">
-         
-         <h2>Payment Form</h2>
-         <form id="payment-form" action="{% url 'process_payment' %}" method="post">
-           {% csrf_token %}
-           <label>Card Number</label>
-           <input type="text" name="Card Number" required="" pattern="\d{4}\d{4}\d{4}\d{4}" placeholder="1234 1234 1234 1234">
-           <label>Expiry Date</label>
-           <select name="expiration_month" id="expiration_month" required>
-             <option value="" disabled selected>Select month</option>
-             <option value="01">January</option>
-             <option value="02">February</option>
-             <option value="03">March</option>
-             <option value="04">April</option>
-             <option value="05">May</option>
-             <option value="06">June</option>
-             <option value="07">July</option>
-             <option value="08">August</option>
-             <option value="09">September</option>
-             <option value="10">October</option>
-             <option value="11">November</option>
-             <option value="12">December</option>
-           </select>
-           <select name="expiration_year" id="expiration_year" required>
-             <option value="" disabled selected>Select year</option>
-             <option value="2024">2024</option>
-             <option value="2025">2025</option>
-             <option value="2026">2026</option>
-             <option value="2027">2027</option>
-             <option value="2028">2028</option>
-             <option value="2029">2029</option>
-             <option value="2030">2030</option>
-           </select>
-           <br><br>
-           <label>CVV</label>
-           <input type="text" name="cvv" required="" pattern="\d{3}" placeholder="123">
-           <label>Total Price</label>
-           <input type="text" id="payment-total-price" name="total_price" readonly><br>
-           <input type="hidden" name="movie_id" value="{{ selected_movie.movie_id }}">
-           <input type="hidden" name="selected_seats" id="payment-selected-seats">
-           <button type="submit" onclick="showPaymentMessage()">Book Tickets</button>
-         </form>
+       <br><br>
+  
+       <div class="container-black">
+       <form class="container container_mt5" id="booking-form" action="{% url 'booktickets' %}" method="post">
+         {% csrf_token %}
+         <label class="label-text">Name</label>
+         <input type="text" name="Name" required><br>
+         <label class="label-text">Contact Number</label>
+         <input type="text" name="Contact Number" required><br>
+         <label class="label-text">Email</label>
+         <input type="email" name="Email"><br>
+         <label class="label-text">Date</label>
+         <input type="date" name="Date" required><br>  
+         <label class="label-text">Seat count</label>
+         <input type="number" name="Seat count" id="seat-count" min="1" max="25" required readonly>
+         <input type="hidden" name="movie_id" value="{{ selected_movie.movie_id }}">
+         <input type="hidden" name="selected_seats" id="selected-seats">
+         <label class="label-text">Total Ticket Price</label>
+         <input type="text" name="Total Ticket Price" id="total-ticket-price" placeholder="Rs." readonly><br>
+         <input type="hidden" name="movie_id" value="{{ selected_movie.movie_id }}">
+         <input type="hidden" name="selected_seats" id="selected-seats">
+         <button type="button" onclick="openPaymentModal()">Proceed to Payment</button>
+       </form>
        </div>
-     </div>
+         {% endif %}
+   
+       <br><br>
+   
+   
+       <div id="paymentModal" class="modal">
+         <div class="modal-content">
+           
+           <h2>Payment Form</h2>
+           <form id="payment-form" action="{% url 'process_payment' %}" method="post">
+             {% csrf_token %}
+             <label>Card Number</label>
+             <input type="text" name="Card Number" required="" pattern="\d{4}\d{4}\d{4}\d{4}" placeholder="1234 1234 1234 1234">
+             <label>Expiry Date</label>
+             <select name="expiration_month" id="expiration_month" required>
+               <option value="" disabled selected>Select month</option>
+               <option value="01">January</option>
+               <option value="02">February</option>
+               <option value="03">March</option>
+               <option value="04">April</option>
+               <option value="05">May</option>
+               <option value="06">June</option>
+               <option value="07">July</option>
+               <option value="08">August</option>
+               <option value="09">September</option>
+               <option value="10">October</option>
+               <option value="11">November</option>
+               <option value="12">December</option>
+             </select>
+             <select name="expiration_year" id="expiration_year" required>
+               <option value="" disabled selected>Select year</option>
+               <option value="2024">2024</option>
+               <option value="2025">2025</option>
+               <option value="2026">2026</option>
+               <option value="2027">2027</option>
+               <option value="2028">2028</option>
+               <option value="2029">2029</option>
+               <option value="2030">2030</option>
+             </select>
+             <br><br>
+             <label>CVV</label>
+             <input type="text" name="cvv" required="" pattern="\d{3}" placeholder="123">
+             <label>Total Price Rs.</label>
+             <input type="text" id="payment-total-price" name="total_price" readonly><br>
+             <input type="hidden" name="movie_id" value="{{ selected_movie.movie_id }}">
+             <input type="hidden" name="selected_seats" id="payment-selected-seats">
+             <button type="submit" onclick="showMessage()">Book Tickets</button>
+           </form>
+         </div>
+       </div>
            
  
            <br><br>
@@ -379,11 +415,11 @@
 
 
     <script>
-      function showPaymentMessage() {
-          alert('Payment Successful!');
-          window.location.href = '/user_home.html';  // Redirect to home.html
+      function showMessage() {
+          alert("Your tickets are booked successfully!");
+          // window.location.href = '/user_home.html';
       }
-    </script>
+  </script>
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
