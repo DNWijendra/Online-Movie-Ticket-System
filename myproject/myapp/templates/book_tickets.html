@@ -232,13 +232,13 @@
             <div class="container" data-aos="fade-up">
       
               <div class="section-title">
-                <h2>Book Tickets</h2>
+                <h2>Book Tickets For {{ selected_movie.movie_name }}</h2> 
               </div>
               <!-- <a href="/home">Home page</a> -->
       <br><br>
        <!-- Movie Selection -->
        {% if selected_movie %}
-       <h3 class="label-text">{{ selected_movie.movie_name }}</h3>
+       <h3 class="label-text"></h3>
        {% else %}
        <form action="{% url 'booktickets' %}" method="get">
          <label class="label-text" for="movie_id">Select Movie:</label>
