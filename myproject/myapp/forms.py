@@ -12,7 +12,7 @@ class New_User_Form(UserCreationForm):
 class New_Movie_Form(ModelForm):
     class Meta:
         model = Movie
-        fields = '__all__'
+        fields = ['movie_name','ticket_price','image','show_time','type','language','release_date','screening_type']
         widgets = {
             'release_date': forms.DateInput(attrs={'type': 'date'})
         }
