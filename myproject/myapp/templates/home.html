@@ -212,6 +212,21 @@
             <h2>Now Showing</h2>
         </div>
         <div class="cards-container">
+          {% for movie in movies %}
+          <div class="card">
+            <img src="{{ movie.image.url }}" class="img-fluid" alt="{{ movie.movie_name }}">
+            <h3>{{ movie.movie_name }}</h3>
+            <div class="overlay">
+              <div class="details">
+                <p>Genre: {{ movie.type }}</p>
+                <p>Language: {{ movie.language }}</p>
+                <p>Show Time: {{ movie.show_time}}</p>
+              </div>
+              <div class="text">
+                <a href="{{ movie.buy_tickets_url }}">Buy Tickets</a>
+                <a href="{{ movie.trailer_url }}" target="_blank">Watch Trailer</a>
+              </div>
+              {% endfor %}
             {% for movie in now_showing_movies %}
             <div class="card">
                 <img src="{{ movie.image.url }}" class="img-fluid" alt="{{ movie.movie_name }}">
