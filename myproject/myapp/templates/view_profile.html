@@ -165,61 +165,7 @@
 
     <br><br><br>
     <!-- ======= Portfoio Section ======= -->
-   <!-- ======= Now Showing Section ======= -->
-   <section id="portfolio" class="portfolio">
-    <div class="container" data-aos="fade-up">
-        <div class="section-title">
-            <h2>Now Showing</h2>
-        </div>
-        <div class="cards-container">
-            {% for movie in now_showing_movies %}
-            <div class="card">
-                <img src="{{ movie.image.url }}" class="img-fluid" alt="{{ movie.movie_name }}">
-                <h3>{{ movie.movie_name }}</h3>
-                <div class="overlay">
-                    <div class="details">
-                        <p>Genre: {{ movie.type }}</p>
-                        <p>Language: {{ movie.language }}</p>
-                        <p>Show Time: {{ movie.show_time }}</p>
-                    </div>
-                    <div class="text">
-                        <a href="#">Buy Tickets</a>
-                        <a href="{{ movie.trailer_url }}">Watch Trailer</a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
-<!-- ======= Coming Soon Section ======= -->
-<section id="coming-soon" class="coming-soon">
-    <div class="container" data-aos="fade-up">
-        <div class="section-title">
-            <h2>Coming Soon</h2>
-        </div>
-        <div class="cards-container">
-            {% for movie in coming_soon_movies %}
-            <div class="card">
-                <img src="{{ movie.image.url }}" class="img-fluid" alt="{{ movie.movie_name }}">
-                <h3>{{ movie.movie_name }}</h3>
-                <div class="overlay">
-                    <div class="details">
-                        <p>Genre: {{ movie.type }}</p>
-                        <p>Language: {{ movie.language }}</p>
-                        <p>Release Date: {{ movie.release_date }}</p>
-                    </div>
-                    <div class="text">
-                        <a href="{{ movie.trailer_url }}">Watch Trailer</a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-<!-- End Portfolio Section -->
+   <!-- End Portfolio Section -->
 
   </main><!-- End #main -->
 
