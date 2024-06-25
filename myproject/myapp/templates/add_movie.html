@@ -30,8 +30,89 @@
         <!-- Template Main CSS File -->
         <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+
+        <style>
+          @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+  
+          .add-movie-container {
+              font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+              background-color: #B4B4B8;
+              padding: 30px;
+              border-radius: 15px;
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+              max-width: 600px;
+              margin: 100px auto;
+              text-align: center;
+          }
+  
+          .add-movie-container h2 {
+              margin-bottom: 20px;
+              color: #FF204E;
+              font-weight: 700;
+          }
+  
+          .add-movie-container .form-group {
+              margin-bottom: 20px;
+              text-align: left;
+          }
+  
+          .add-movie-container label {
+              display: block;
+              margin-bottom: 5px;
+              color: #333;
+              font-weight: 700;
+          }
+  
+          .add-movie-container input[type="text"],
+          .add-movie-container input[type="password"],
+          .add-movie-container textarea,
+          .add-movie-container select {
+              width: 100%;
+              padding: 10px;
+              margin-top: 5px;
+              border: 1px solid #ddd;
+              border-radius: 5px;
+              box-sizing: border-box;
+              font-size: 16px;
+          }
+  
+          .add-movie-container .btn-primary {
+              width: 100%;
+              padding: 10px;
+              background-color: #FF204E;
+              border: none;
+              border-radius: 5px;
+              color: white;
+              font-size: 18px;
+              cursor: pointer;
+              transition: background-color 0.3s ease;
+              font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+          }
+  
+          .add-movie-container .btn-primary:hover {
+              background-color: #FF204E;
+          }
+  
+          .add-movie-container .nav-link {
+              display: block;
+              margin-top: 15px;
+              color: #FF204E;
+              text-decoration: none;
+              font-weight: 700;
+          }
+  
+          .add-movie-container .nav-link:hover {
+              text-decoration: underline;
+          }
+  
+          .add-movie-container .error {
+              color: red;
+              margin-top: 10px;
+          }
+      </style>
+  </head>
+  <body>
+
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top d-flex align-items-center ">
         <div class="container d-flex align-items-center justify-content-between">
@@ -56,44 +137,24 @@
       </section><!-- End Hero -->
     
       <main id="main">
-    
         <br><br><br>
-        <!-- ======= Portfoio Section ======= -->
-        <section id="portfolio" class="portfoio">
-          <div class="container" data-aos="fade-up">
-    
-            <div class="section-title">
-              <h2>Add Movies</h2>
+        <!-- ======= Add Movie Section ======= -->
+        <section id="add-movie" class="add-movie">
+            <div class="add-movie-container" data-aos="fade-up">
+                <div class="section-title">
+                    <h2>Add Movies</h2>
+                </div>
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.as_p }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Movie</button>
+                </form>
             </div>
-            <!-- <a href="/home">Home page</a> -->
-    <br><br>
-    
-    <div class="container mt-5">
-        <form action="" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="form-group">
-                {{ form.as_p }}
-            </div>
-            <button type="submit" class="btn btn-primary">Add Movie</button>
-        </form>
-    </div>
-
-          <br><br>
-    
-          </div>
         </section>
-        <!-- End Portfoio Section -->
-    
-      </main><!-- End #main -->
-<!-- 
-    <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Add Movie"/>
-    </form> -->
-
-    <!-- <a href="/home">Home page</a>
-    <a href="/login_home">View Movies</a> -->
+        <!-- End Add Movie Section -->
+    </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
     <footer id="footer">

@@ -9,6 +9,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.utils import timezone
+from .models import Movie
 
 def admin_signup(request):
     if request.method == 'POST':

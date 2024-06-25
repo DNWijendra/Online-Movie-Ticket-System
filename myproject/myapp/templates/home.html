@@ -131,6 +131,20 @@
             padding: 12px;
             border-radius: 8px;
             }
+
+            #hero {
+            height: 90vh; /* Increase the height of the hero section */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+          }
+
+          .carousel-item img {
+            width: 50%;
+            height: 50vh;
+            object-fit: cover;
+            }  
         </style>
     
     </head>
@@ -145,7 +159,6 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-            <li><a class="nav-link scrollto active" href="">Book Tickets</a></li>
             <li class="dropdown">My Account<i class="bi bi-chevron-right"></i>
               <ul>
                 <li><a href="{% url 'user_login' %}">User Login</a></li>
@@ -319,3 +332,4 @@
 
 </body>
 </html>
+
