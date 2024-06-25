@@ -231,7 +231,7 @@ h6 {
   position: relative;
 }
 
-.navbar>ul>li {
+.navbar > ul > li {
   position: relative;
   white-space: nowrap;
   padding: 10px 0 10px 24px;
@@ -244,10 +244,14 @@ h6 {
   justify-content: space-between;
   padding: 0 3px;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
+  color: #ffffff;
   white-space: nowrap;
   transition: 0.3s;
   position: relative;
+  font-weight: bold;
+  padding: 10px 15px; /* Add padding */
+  border-radius: 5px; /* Add border-radius */
+  background-color: #525252; /* Add a subtle background */
 }
 
 .navbar a i,
@@ -257,7 +261,7 @@ h6 {
   margin-left: 5px;
 }
 
-.navbar>ul>li>a:before {
+.navbar > ul > li > a:before {
   content: "";
   position: absolute;
   width: 100%;
@@ -271,7 +275,7 @@ h6 {
 }
 
 .navbar a:hover:before,
-.navbar li:hover>a:before,
+.navbar li:hover > a:before,
 .navbar .active:before {
   visibility: visible;
   width: 100%;
@@ -280,8 +284,23 @@ h6 {
 .navbar a:hover,
 .navbar .active,
 .navbar .active:focus,
-.navbar li:hover>a {
-  color: #fff;
+.navbar li:hover > a {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1); /* Change background on hover */
+}
+
+.navbar .dropdown > a {
+  color: #fff; /* Change My Account color to white */
+  font-weight: bold; /* Make My Account text bold */
+  padding: 10px 15px; /* Add padding */
+  border-radius: 5px; /* Add border-radius */
+  background-color: #525252; /* Add a subtle background */
+  transition: background-color 0.3s, color 0.3s; /* Add transition for hover effect */
+}
+
+.navbar .dropdown > a:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Change background on hover */
+  color: #fff; /* Ensure text color remains white on hover */
 }
 
 .navbar .dropdown ul {
@@ -294,8 +313,7 @@ h6 {
   z-index: 99;
   opacity: 0;
   visibility: hidden;
-  background: #fff;
-  box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+  background: #525252;
   transition: 0.3s;
   border-radius: 8px;
 }
@@ -309,20 +327,17 @@ h6 {
   font-size: 14px;
   font-weight: 500;
   text-transform: none;
-  color: #000;
-}
-
-.navbar .dropdown ul a i {
-  font-size: 12px;
+  color: #ffffff;
+  font-weight: bold;
 }
 
 .navbar .dropdown ul a:hover,
 .navbar .dropdown ul .active:hover,
-.navbar .dropdown ul li:hover>a {
-  color: #0880e8;
+.navbar .dropdown ul li:hover > a {
+  color: #FF204E;
 }
 
-.navbar .dropdown:hover>ul {
+.navbar .dropdown:hover > ul {
   opacity: 1;
   top: 100%;
   visibility: visible;
@@ -334,7 +349,7 @@ h6 {
   visibility: hidden;
 }
 
-.navbar .dropdown .dropdown:hover>ul {
+.navbar .dropdown .dropdown:hover > ul {
   opacity: 1;
   top: 0;
   left: 100%;
@@ -346,7 +361,7 @@ h6 {
     left: -90%;
   }
 
-  .navbar .dropdown .dropdown:hover>ul {
+  .navbar .dropdown .dropdown:hover > ul {
     left: -100%;
   }
 }
