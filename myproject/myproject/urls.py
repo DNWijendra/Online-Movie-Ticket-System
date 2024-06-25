@@ -40,8 +40,8 @@ urlpatterns = [
     path('deletemovie/<int:movie_id>', views.delete_movie, name='deletemovie'),
     path('editmovie/<int:movie_id>', views.edit_movie, name='editmovie'),
     path('updatemovie/<int:movie_id>', views.update_movie, name='updatemovie'),
-    path('process_payment/', views.process_payment, name='process_payment'),
-    path('view_profile/', views.view_profile, name='view_profile')
+    path('process_payment/', views.process_payment, name='process_payment')
+    # path('view_profile/', views.view_profile, name='view_profile')
 ]
 
 # Adding static and media URL patterns
