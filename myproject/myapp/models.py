@@ -42,6 +42,15 @@ class Movie(models.Model):
     language = models.CharField(max_length=10, choices=LANGUAGE_CHOICES, null=True)
     release_date = models.DateField(null=True)
     screening_type = models.CharField(max_length=20, choices=SCREENING_CHOICES, null=True)
+    booked_seats = models.ManyToManyField('BookedSeat', blank=True)
+
 
     def __str__(self):
         return self.movie_name
+
+class BookedSeat(models.Model):
+    row = models.CharField(max_length=1)
+    col = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.row}{self.col}"
