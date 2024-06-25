@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
+from django.utils import timezone
 
 def admin_signup(request):
 >>>>>>> 88df72d6177384df391cc8b6cd9f45053b515c80
@@ -91,12 +92,21 @@ def admin_login(request):
     return render(request, 'admin_login.html')
 
 def user_home(request):
-    movies = Movie.objects.all()
-    return render(request,'user_home.html',{'movies':movies})
+    today = timezone.now().date()
+    now_showing_movies = Movie.objects.filter(release_date__lte=today)
+    context = {
+        'movies': now_showing_movies,
+    }
+    return render(request, 'user_home.html', context)
 
 def home(request):
-    movies = Movie.objects.all()
-    return render(request,'home.html',{'movies':movies})
+    now_screening_movies = Movie.objects.filter(screening_type='Now Screening')
+    coming_soon_movies = Movie.objects.filter(screening_type='Coming Soon')
+    context = {
+        'now_showing_movies': now_screening_movies,
+        'coming_soon_movies': coming_soon_movies,
+    }
+    return render(request, 'home.html', context)
 
 #admin login home to add/remove/edit content
 def Login_home(request):
@@ -218,5 +228,9 @@ def process_payment(request):
 =======
         form = New_Movie_Form(instance=movie_instance)
     
+<<<<<<< HEAD
     return render(request, 'edit_movie.html', {'form': form, 'movie_id': movie_id})
 >>>>>>> 88df72d6177384df391cc8b6cd9f45053b515c80
+=======
+    return render(request, 'edit_movie.html', {'form': form, 'movie_id': movie_id})
+>>>>>>> 5f01260b1f620522c28892c7adb890ea0d71bebc
