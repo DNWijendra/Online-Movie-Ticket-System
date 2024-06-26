@@ -38,28 +38,6 @@ def user_signup(request):
         form = UserCreationForm()
     return render(request, 'user_signup.html', {'form': form})
 
-# def signup(request):
-#     if request.method == 'POST':
-#         form = New_User_Form(request.POST,request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('login')
-#     else:
-#         form = New_User_Form()
-#     return render(request,'signup.html',{'form':form})
-
-#admin login
-# def user_login(request):
-#     if request.method == 'POST':
-#         user = request.POST.get('username')
-#         pwd = request.POST.get('password')
-#         user = authenticate(username=user,password=pwd)
-#         if user is not None:
-#             return redirect('Login_home')
-#         else:
-#             return render(request, 'login.html', {'error': 'Invalid credentials'})
-#     return render(request,'login.html')
-
 def user_login(request):
     if request.method == 'POST':
         user = request.POST.get('username')
@@ -211,5 +189,3 @@ def process_payment(request):
         return redirect('booktickets')
 
     return redirect('booktickets')
-# def view_profile(request):
-#     return render(request, 'view_profile.html')
