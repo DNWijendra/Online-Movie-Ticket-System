@@ -1,12 +1,16 @@
 Group 10 
 # Online-Movie-Ticket-System
 
-Phase 1 -
+Functionalities
+
 View movie and their details, 
 Admin Login , Logout, 
 Admin sign up,
-Add, Delete, View movies by admin
+Add, Delete, View movies by admin,
+User Login, User Signup,
+Book tickets, 
+Watch Trailer, 
+Book tickets form, Payment form. 
 
-Yet To complete  : 
-Css of html pages,
-Edited functionalities
+
+
